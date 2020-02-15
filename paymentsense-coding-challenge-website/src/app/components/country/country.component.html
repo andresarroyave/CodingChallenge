@@ -1,0 +1,69 @@
+<a [routerLink]="['']">Back</a>
+<div *ngIf="country" class="main-country">
+    <div>
+        
+        <h1>{{country.name}} ({{country.alpha3Code}})</h1>
+        <img [src]="country.flag" class="flag" />
+        <h2>Capital: {{country.capital}}</h2>
+</div>
+    <div>
+        <mat-label *ngIf="country.region">Region: </mat-label>
+        <span>{{country.region}}</span>
+    </div>
+    <div>
+        <mat-label *ngIf="country.subregion">Sub region: </mat-label>
+        <span>{{country.subregion}}</span>
+    </div>
+    <div>
+        <mat-label *ngIf="country.area">Area: </mat-label>
+        <span>{{country.area}}</span>
+    </div>
+    <div>
+        <mat-label *ngIf="country.population">Population: </mat-label>
+        <span>{{country.population}}</span>
+    </div>
+    <div>
+        <mat-label *ngIf="country.nativeName">Native name: </mat-label>
+        <span>{{country.nativeName}}</span>
+    </div>
+    <div>
+        <mat-label *ngIf="country.demonym">Demonym: </mat-label>
+        <span>{{country.demonym}}</span>
+    </div>
+    <div>
+        <mat-label>Languages: </mat-label>
+        <table mat-table [dataSource]="country.languages">
+            <ng-container [matColumnDef]="column" *ngFor="let column of languageColumnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="languageColumnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: languageColumnsToDisplay;"></tr>
+        </table>
+    </div>
+    <div>
+        <mat-label>Currency: </mat-label>
+        <table mat-table [dataSource]="country.currencies">
+            <ng-container [matColumnDef]="column" *ngFor="let column of curerncyColumnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="curerncyColumnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: curerncyColumnsToDisplay;"></tr>
+        </table>
+    </div>
+    <div *ngIf="!country.regionalBlocs || country.regionalBlocs.length > 0">
+        <mat-label>Regional Blocs: </mat-label>
+        <table mat-table [dataSource]="country.regionalBlocs">
+            <ng-container [matColumnDef]="column" *ngFor="let column of regionalBlocsColumnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column}} </th>
+                <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="regionalBlocsColumnsToDisplay"></tr>
+            <tr mat-row *matRowDef="let row; columns: regionalBlocsColumnsToDisplay;"></tr>
+        </table>
+    </div>
+</div>

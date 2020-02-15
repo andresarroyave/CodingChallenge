@@ -17,7 +17,11 @@ export class AppComponent {
   public paymentsenseCodingChallengeApiActiveIconColour = 'red';
 
   constructor(private paymentsenseCodingChallengeApiService: PaymentsenseCodingChallengeApiService) {
-    paymentsenseCodingChallengeApiService.getHealth().pipe(take(1))
+    this.getHealth();
+  }
+
+  private getHealth(): void {
+    this.paymentsenseCodingChallengeApiService.getHealth().pipe(take(1))
     .subscribe(
       apiHealth => {
         this.paymentsenseCodingChallengeApiIsActive = apiHealth === 'Healthy';
@@ -33,5 +37,6 @@ export class AppComponent {
         this.paymentsenseCodingChallengeApiActiveIcon = this.faThumbsDown;
         this.paymentsenseCodingChallengeApiActiveIconColour = 'red';
       });
+
   }
 }
